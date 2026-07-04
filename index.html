@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0a0a0f">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Worldline">
+<title>Worldline</title>
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<link rel="icon" type="image/png" href="icons/icon-192.png">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brand" id="brandHome">
+      <span class="brand-dot"></span>
+      <span class="brand-name">WORLDLINE</span>
+    </div>
+    <div class="topbar-actions">
+      <button class="icon-btn" id="themeToggle" title="Cambiar tema">◐</button>
+      <button class="icon-btn" id="settingsBtn" title="Ajustes">⚙</button>
+    </div>
+  </div>
+</header>
+
+<main id="viewContainer">
+
+  <!-- ============ THE NEXUS (dashboard) ============ -->
+  <section id="view-nexus" class="view">
+    <div class="nexus-hero">
+      <canvas id="nexusCanvas" height="160"></canvas>
+      <div class="nexus-hero-text">
+        <h1>The Nexus</h1>
+        <p class="muted">Mapea futuros. Observa variables. Aprende de tu línea temporal.</p>
+      </div>
+    </div>
+
+    <div class="nexus-cta">
+      <button class="btn primary" data-newfork="quick">⚡ Quick Fork</button>
+      <button class="btn ghost" data-newfork="deep">🌌 Deep Universe</button>
+    </div>
+
+    <div class="nexus-grid" id="nexusGrid"><!-- cards injected --></div>
+  </section>
+
+  <!-- ============ FORKS LIST ============ -->
+  <section id="view-forks" class="view hidden">
+    <div class="view-head">
+      <h1>Bifurcaciones</h1>
+      <div class="seg" id="forkFilter">
+        <button data-f="open" class="on">Abiertas</button>
+        <button data-f="resolved">Prime Timeline</button>
+        <button data-f="all">Todas</button>
+      </div>
+    </div>
+    <div id="forksList" class="stack"></div>
+  </section>
+
+  <!-- ============ NEW FORK WIZARD ============ -->
+  <section id="view-newfork" class="view hidden">
+    <div class="view-head">
+      <h1 id="wizardTitle">Nueva bifurcación</h1>
+      <div class="steps" id="wizardSteps"></div>
+    </div>
+    <div id="wizardBody"></div>
+    <div class="wizard-nav">
+      <button class="btn ghost" id="wizPrev">← Atrás</button>
+      <button class="btn primary" id="wizNext">Siguiente →</button>
+    </div>
+  </section>
+
+  <!-- ============ FORK DETAIL / BRANCH COMPARE ============ -->
+  <section id="view-fork" class="view hidden">
+    <div id="forkDetail"></div>
+  </section>
+
+  <!-- ============ CAUSAL FIELD ============ -->
+  <section id="view-causal" class="view hidden">
+    <div class="view-head"><h1>Causal Field</h1></div>
+    <p class="muted" id="causalHint">Elegí una bifurcación con variables y relaciones para experimentar con sus leyes internas.</p>
+    <div id="causalPicker" class="stack"></div>
+    <div id="causalStage"></div>
+  </section>
+
+  <!-- ============ OBSERVATORY ============ -->
+  <section id="view-observatory" class="view hidden">
+    <div class="view-head">
+      <h1>Observatory</h1>
+      <button class="btn small primary" id="newNoteBtn">+ Nota</button>
+    </div>
+    <div class="chips scroll-x" id="obsCategories"></div>
+    <div id="obsList" class="stack"></div>
+  </section>
+
+</main>
+
+<!-- ============ BOTTOM NAV ============ -->
+<nav class="tabbar">
+  <button data-view="nexus" class="tab on"><span class="tab-ico">◉</span>Nexus</button>
+  <button data-view="forks" class="tab"><span class="tab-ico">⑂</span>Forks</button>
+  <button data-view="newfork" class="tab tab-new"><span class="tab-ico big">+</span></button>
+  <button data-view="causal" class="tab"><span class="tab-ico">✳</span>Causal</button>
+  <button data-view="observatory" class="tab"><span class="tab-ico">☾</span>Observatory</button>
+</nav>
+
+<!-- ============ MODAL ============ -->
+<div id="modal" class="modal hidden">
+  <div class="modal-card" id="modalCard"></div>
+</div>
+
+<div id="toast" class="toast hidden"></div>
+
+<script src="engine.js"></script>
+<script src="app.js"></script>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => navigator.serviceWorker.register('service-worker.js').catch(()=>{}));
+}
+</script>
+</body>
+</html>
